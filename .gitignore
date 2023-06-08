@@ -1,6 +1,6 @@
 x64
 
-.aps
-.vcxproj
-.filters
-.user
+*.aps
+*.vcxproj
+*.filters
+*.user
