@@ -1,4 +1,4 @@
-#include "display.h"
+﻿#include "display.h"
 #include "player.h"
 #include "Item.h"
 #include <iostream>
@@ -41,7 +41,7 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item i
                 }
 
                 cout << "|";
-                if (y == 3) cout << "  " << player.getScore() << " points";
+                if (y == sizeY / 2) cout << "  " << player.getScore() << " points";
                 cout << endl;
 
             }

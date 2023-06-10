@@ -9,7 +9,7 @@ private:
     static char direction;
 
 public:
-    static void listen(int sizeX, int sizeY, Player& player, bool& refresh);
+    static void listen(int sizeX, int sizeY, Player& player, bool& refresh, bool& running);
 
 };
 
