@@ -13,7 +13,7 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item i
         system("cls");
         if (player.getX() == item.getX() && player.getY() == item.getY())
         {
-            Item::updateItem(sizeX, sizeY);
+            Item::updateItem(sizeX, sizeY, player);
             player.increaseScore();
 
         }

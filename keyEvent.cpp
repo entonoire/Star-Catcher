@@ -36,7 +36,7 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
         }
         else if (GetKeyState(0x52) & 0x8000)  // R
         {
-            Item::updateItem(sizeX, sizeY);
+            Item::updateItem(sizeX, sizeY, player);
             refresh = true;
 
         }

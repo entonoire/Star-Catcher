@@ -1,21 +1,29 @@
 #include "Item.h"
 #include <random>
+#include "player.h"
 
-int random(int min, int max) { return min + (rand() % (max - min + 1)); }
+
+namespace util
+{
+    int random(int min, int max) { return min + (rand() % (max - min + 1)); }
+
+}
+
 int Item::pos[2] = { 0, 0 };
 
-Item::Item(int sizeX, int sizeY) 
+Item::Item(int sizeX, int sizeY, Player player) 
 {
-
-    updateItem(sizeX, sizeY);
+    updateItem(sizeX, sizeY, player);
 
 }
 
 
-void Item::updateItem(int sizeX, int sizeY)
+void Item::updateItem(int sizeX, int sizeY, Player player)
 {
-    pos[0] = random(1, sizeX - 1);
-    pos[1] = random(1, sizeY - 2);
+    pos[0] = util::random(1, sizeX - 1);
+    pos[1] = util::random(1, sizeY - 2);
+
+    if (pos[0] == player.getX() && pos[1] == player.getY()) updateItem(sizeX, sizeX, player);
 
 }
 
