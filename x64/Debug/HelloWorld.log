@@ -1,4 +1,4 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (HelloWorld.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
-  keyEvent.cpp
-F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\menu.h(11,41): warning C4091: 'static ' : ignoré à gauche de 'Menu::Item' quand aucune variable n'est déclarée
+  menu.cpp
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\menu.h(11,53): warning C4091: 'static ' : ignoré à gauche de 'Menu::Item' quand aucune variable n'est déclarée
   HelloWorld.vcxproj -> F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\x64\Debug\StarCatcher.exe

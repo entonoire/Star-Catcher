@@ -2,6 +2,7 @@
 #include "player.h"
 #include "Item.h"
 #include <iostream>
+#include <Windows.h>
 
 using namespace std;
 
@@ -11,6 +12,10 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item i
     if ((player.getOldX() != player.getX() || player.getOldY() != player.getY()) || refresh)
     {
         system("cls");
+        HANDLE  hConsole;
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        FlushConsoleInputBuffer(hConsole);
+
         if (player.getX() == item.getX() && player.getY() == item.getY())
         {
             Item::updateItem(sizeX, sizeY, player);
@@ -35,7 +40,12 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item i
 
 
                     if (player.getX() == x && player.getY() == y) cout << "o";
-                    else if (item.getX() == x && item.getY() == y) cout << "*";
+                    else if (item.getX() == x && item.getY() == y)
+                    {
+                        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+                        cout << "*";
+                        SetConsoleTextAttribute(hConsole, 7);
+                    }
                     else cout << " ";
 
                 }

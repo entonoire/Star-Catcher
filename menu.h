@@ -8,7 +8,7 @@ class Menu
 {
 
 public:
-	static enum Item { play = 0, quit = 1 };
+	static enum Item { play = 0, quit = 1, option = 2 };
 	static bool isOpen();
 	static void display(bool& refresh);
 	static Item getSelectedItem();
