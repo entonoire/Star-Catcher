@@ -3,6 +3,7 @@
 #include "player.h"
 #include "item.h"
 #include "menu.h"
+#include "option.h"
 
 char KeyEvent::direction = 'n';
 
@@ -77,10 +78,17 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
             {
             case Menu::quit :
                 running = false;
-                break;
 
+                break;
+            case Menu::option:
+                Menu::setState(false);
+                Option::setState(true);
+                refresh = true;
+
+                break;
             case Menu::play:
                 Menu::setState(false);
+                Option::setState(false);
                 refresh = true;
 
                 break;

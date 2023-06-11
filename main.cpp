@@ -13,6 +13,7 @@
 #include <cmath>
 #include "menu.h"
 #include <cstdio>
+#include "option.h"
 using namespace std;
 #pragma execution_character_set( "utf-8" )
 
@@ -71,6 +72,11 @@ int main()
         if (Menu::isOpen())
         {
             Menu::display(refresh);
+
+        }
+        else if (Option::isOpen())
+        {
+            Option::display(refresh);
 
         }
         else

@@ -5,6 +5,7 @@
 
 using namespace util;
 using namespace std;
+using namespace colorCode;
 
 Menu::Item Menu::selectedItem = Menu::Item::play;
 Menu::Item Menu::oldSelectedItem = Menu::Item::quit;
@@ -34,14 +35,10 @@ void Menu::display(bool& refresh) {
         hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         FlushConsoleInputBuffer(hConsole);
 
-        int color = FOREGROUND_GREEN;
-        int selectColor = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-        int baseColor = 7;
-
         cout << " ---------------------- " << endl;
         cout << "|     ";
-        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-        cout << "\033[4mStar Catcher";
+        SetConsoleTextAttribute(hConsole, title);
+        cout << underline << "Star Catcher";
         SetConsoleTextAttribute(hConsole, baseColor);
         cout << "     |" << endl;
         cout << "|                      |" << endl;

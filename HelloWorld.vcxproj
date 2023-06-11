@@ -24,6 +24,7 @@
     <ClCompile Include="keyEvent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="option.cpp" />
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +32,7 @@
     <ClInclude Include="item.h" />
     <ClInclude Include="keyEvent.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="option.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
