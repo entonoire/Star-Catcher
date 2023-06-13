@@ -15,9 +15,11 @@ string tips[3] = {"You can zoom with CTRL + SCROLL.", "Press R to force reload t
 
 bool Menu::isOpen() { return open; }
 
-void Menu::setState(bool state) { 
+void Menu::setState(bool state) 
+{ 
+    Menu::selectedItem = Menu::Item::play;
+    Menu::oldSelectedItem = Menu::Item::quit;
     open = state;
-    system("cls");
 
 }
 

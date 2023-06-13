@@ -3,6 +3,7 @@
 #include "Item.h"
 #include <iostream>
 #include <Windows.h>
+#include "option.h"
 
 using namespace std;
 
@@ -39,12 +40,13 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item i
                 {
 
 
-                    if (player.getX() == x && player.getY() == y) cout << "o";
+                    if (player.getX() == x && player.getY() == y) cout << Option::appearances[(Option::appearances.size() - 1) / 2];
                     else if (item.getX() == x && item.getY() == y)
                     {
                         SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
                         cout << "*";
                         SetConsoleTextAttribute(hConsole, 7);
+
                     }
                     else cout << " ";
 

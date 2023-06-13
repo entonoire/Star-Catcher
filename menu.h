@@ -13,6 +13,7 @@ namespace colorCode
 	int const title = FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
 	int const selectColor = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	int const baseColor = 7;
+	int const inaccessible = 8;
 
 }
 

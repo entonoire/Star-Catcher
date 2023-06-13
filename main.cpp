@@ -18,7 +18,7 @@ using namespace std;
 #pragma execution_character_set( "utf-8" )
 
 int sizeX = 10, sizeY = 5;
-
+bool fullscreen = false;
 
 void formatConsole()
 {
@@ -33,25 +33,7 @@ void formatConsole()
     SetConsoleTitleW(L"Star Catch - Beta v0.1");
 
     /* --- pressing F11 to fullscreen --- */
-    if (false)
-    {
-        INPUT inputs[2] = {};
-        ZeroMemory(inputs, sizeof(inputs));
-
-        inputs[0].type = INPUT_KEYBOARD;
-        inputs[0].ki.wVk = VK_F11;
-
-        inputs[1].type = INPUT_KEYBOARD;
-        inputs[1].ki.wVk = VK_F11;
-        inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
-
-        UINT uSent = SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
-        if (uSent != ARRAYSIZE(inputs))
-        {
-            cerr << (L"SendInput failed: 0x%x\n", HRESULT_FROM_WIN32(GetLastError())) << endl;
-        }
-
-    }
+    if (fullscreen) Option::setFullscreen();
 
 }
 
@@ -76,7 +58,7 @@ int main()
         }
         else if (Option::isOpen())
         {
-            Option::display(refresh);
+            Option::display(refresh, fullscreen);
 
         }
         else

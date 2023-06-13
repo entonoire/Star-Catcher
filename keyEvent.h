@@ -10,6 +10,7 @@ private:
 
 public:
     static void listen(int sizeX, int sizeY, Player& player, bool& refresh, bool& running);
+    static bool wait;
 
 };
 
