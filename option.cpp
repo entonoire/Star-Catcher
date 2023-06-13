@@ -12,6 +12,28 @@ bool Option::open = false;
 Option::Item Option::selectedItem = Item::appearance;
 Option::Item Option::oldSelectedItem = Item::back;
 vector<char> Option::appearances = { 'x', 'o', '@' };
+bool Option::fullscreenState = false;
+
+
+void Option::setFullscreen()
+{
+	INPUT inputs[2] = {};
+	ZeroMemory(inputs, sizeof(inputs));
+
+	inputs[0].type = INPUT_KEYBOARD;
+	inputs[0].ki.wVk = VK_F11;
+
+	inputs[1].type = INPUT_KEYBOARD;
+	inputs[1].ki.wVk = VK_F11;
+	inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+	UINT uSent = SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
+	if (uSent != ARRAYSIZE(inputs)) cerr << (L"SendInput failed: 0x%x\n", HRESULT_FROM_WIN32(GetLastError())) << endl;
+	else Option::fullscreenState = !Option::fullscreenState;
+
+}
+
+bool Option::isFullscreen() { return Option::fullscreenState; }
 
 
 bool Option::isOpen() { return Option::open; }
@@ -32,7 +54,7 @@ void Option::setSelectedItem(Item newItem) { Option::selectedItem = newItem; }
 Option::Item Option::getSelectedItem() { return Option::selectedItem; }
 
 
-void Option::display(bool& refresh, bool& fullscreen)
+void Option::display(bool& refresh)
 {
 	if (selectedItem != oldSelectedItem || refresh)
 	{
@@ -173,7 +195,7 @@ void Option::display(bool& refresh, bool& fullscreen)
 		cout << "    |         ";
 
 		// fullscreen selection top
-		SetConsoleTextAttribute(hConsole, inaccessible);
+		if (selectedItem == Option::fullscreenSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
 		cout << "-----";
 		SetConsoleTextAttribute(hConsole, baseColor);
 		cout << "         |" << endl;
@@ -189,7 +211,7 @@ void Option::display(bool& refresh, bool& fullscreen)
 		else
 		{
 			SetConsoleTextAttribute(hConsole, color);
-			cout << " |   FULLSCREEN   | ";
+			if (selectedItem == Option::fullscreenSelection) cout << ">|   FULLSCREEN   |<"; else cout << " |   FULLSCREEN   | ";
 
 		}
 
@@ -197,8 +219,8 @@ void Option::display(bool& refresh, bool& fullscreen)
 		cout << "  |       ";
 
 		// fullscreen selection middle
-		SetConsoleTextAttribute(hConsole, inaccessible);
-		cout << "<| Yes |>";
+		if (selectedItem == Option::fullscreenSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
+		if (Option::fullscreenState) cout << "<| Yes |>"; else cout << "<| No  |>";
 		SetConsoleTextAttribute(hConsole, baseColor);
 		cout << "       |" << endl;
 
@@ -211,7 +233,7 @@ void Option::display(bool& refresh, bool& fullscreen)
 		cout << "    |         ";
 
 		// fullscreen selection bottom
-		SetConsoleTextAttribute(hConsole, inaccessible);
+		if (selectedItem == Option::fullscreenSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
 		cout << "¯¯¯¯¯";
 		SetConsoleTextAttribute(hConsole, baseColor);
 		cout << "         |" << endl;
@@ -252,27 +274,6 @@ void Option::display(bool& refresh, bool& fullscreen)
 
 		oldSelectedItem = selectedItem;
 		refresh = false;
-	}
-
-}
-
-
-void Option::setFullscreen()
-{
-	INPUT inputs[2] = {};
-	ZeroMemory(inputs, sizeof(inputs));
-
-	inputs[0].type = INPUT_KEYBOARD;
-	inputs[0].ki.wVk = VK_F11;
-
-	inputs[1].type = INPUT_KEYBOARD;
-	inputs[1].ki.wVk = VK_F11;
-	inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
-
-	UINT uSent = SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
-	if (uSent != ARRAYSIZE(inputs))
-	{
-		cerr << (L"SendInput failed: 0x%x\n", HRESULT_FROM_WIN32(GetLastError())) << endl;
 	}
 
 }

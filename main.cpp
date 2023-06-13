@@ -18,7 +18,6 @@ using namespace std;
 #pragma execution_character_set( "utf-8" )
 
 int sizeX = 10, sizeY = 5;
-bool fullscreen = false;
 
 void formatConsole()
 {
@@ -30,10 +29,7 @@ void formatConsole()
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(out, &cursorInfo);
 
-    SetConsoleTitleW(L"Star Catch - Beta v0.1");
-
-    /* --- pressing F11 to fullscreen --- */
-    if (fullscreen) Option::setFullscreen();
+    SetConsoleTitleW(L"Star Catch - Beta v0.3");
 
 }
 
@@ -44,12 +40,16 @@ int main()
 
     formatConsole();
 
+    /* --- pressing F11 to fullscreen --- */
+    if (Option::isFullscreen()) Option::setFullscreen();
+
     bool refresh = true;
     bool running = true;
 
     while (running)
     {
         KeyEvent::listen(sizeX, sizeY, player, refresh, running);
+
 
         if (Menu::isOpen())
         {
@@ -58,7 +58,7 @@ int main()
         }
         else if (Option::isOpen())
         {
-            Option::display(refresh, fullscreen);
+            Option::display(refresh);
 
         }
         else

@@ -94,9 +94,12 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
                 refresh = true;
 
                 break;
-
             case Option::appearance:
                 if (!wait) Option::setSelectedItem(Option::appearanceSelection); // wait prevent appearanceSelection to be directly selected on option enter
+
+                break;
+            case Option::fullscreen:
+                if (!wait) Option::setSelectedItem(Option::fullscreenSelection);
 
                 break;
 
@@ -110,6 +113,12 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
             if (Option::getSelectedItem() == Option::appearanceSelection)
             {
                 Option::setSelectedItem(Option::appearance);
+                wait = true;
+
+            }
+            else if (Option::getSelectedItem() == Option::fullscreenSelection)
+            {
+                Option::setSelectedItem(Option::fullscreen);
                 wait = true;
 
             }
@@ -147,6 +156,13 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
 
                 refresh = true;
                 Sleep(100);
+            }
+            else if (Option::getSelectedItem() == Option::fullscreenSelection)
+            {
+                Option::setFullscreen();
+                refresh = true;
+                Sleep(100);
+
             }
 
         }
