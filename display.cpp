@@ -4,10 +4,11 @@
 #include <iostream>
 #include <Windows.h>
 #include "option.h"
+#include <vector>
 
 using namespace std;
 
-void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item item)
+void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector<Item>& stars)
 {
 
     if ((player.getOldX() != player.getX() || player.getOldY() != player.getY()) || refresh)
@@ -17,12 +18,18 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item i
         hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         FlushConsoleInputBuffer(hConsole);
 
-        if (player.getX() == item.getX() && player.getY() == item.getY())
+        for (Item& item : stars)
         {
-            Item::updateItem(sizeX, sizeY, player);
-            player.increaseScore();
+            if (player.getX() == item.getX() && player.getY() == item.getY())
+            {
+                Item::updateItem(sizeX, sizeY, player, item.getPosition());
+                player.increaseScore();
+
+            }
 
         }
+
+
 
         for (int y = 0; y < sizeY; y++)
         {
@@ -39,16 +46,28 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, Item i
                 for (int x = 0; x < sizeX; x++)
                 {
 
-
-                    if (player.getX() == x && player.getY() == y) cout << Option::appearances[(Option::appearances.size() - 1) / 2];
-                    else if (item.getX() == x && item.getY() == y)
+                    bool alreadyDisplayed = false;
+                    if (player.getX() == x && player.getY() == y)
                     {
-                        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-                        cout << "*";
-                        SetConsoleTextAttribute(hConsole, 7);
+                        cout << Option::appearances[(Option::appearances.size() - 1) / 2];
+                        alreadyDisplayed = true;
 
                     }
-                    else cout << " ";
+                    
+                    for (Item item : stars)
+                    {
+                        if (item.getX() == x && item.getY() == y)
+                        {
+                            SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+                            cout << "*";
+                            SetConsoleTextAttribute(hConsole, 7);
+
+                            alreadyDisplayed = true;
+                        }
+
+                    }
+
+                    if (!alreadyDisplayed) cout << " ";
 
                 }
 

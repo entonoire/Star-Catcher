@@ -14,6 +14,7 @@
 #include "menu.h"
 #include <cstdio>
 #include "option.h"
+#include <vector>
 using namespace std;
 #pragma execution_character_set( "utf-8" )
 
@@ -36,7 +37,7 @@ void formatConsole()
 int main()
 {
     Player player(1, 1);
-    Item item(sizeX - 1, sizeY - 2, player);
+    vector<Item> stars = { Item(sizeX - 1, sizeY - 2, player) };
 
     formatConsole();
 
@@ -46,9 +47,10 @@ int main()
     bool refresh = true;
     bool running = true;
 
+
     while (running)
     {
-        KeyEvent::listen(sizeX, sizeY, player, refresh, running);
+        KeyEvent::listen(sizeX, sizeY, player, refresh, running, stars);
 
 
         if (Menu::isOpen())
@@ -68,11 +70,12 @@ int main()
                 sizeX += 5;
                 sizeY += 2;
                 player.increaseScore();
+                stars.push_back(Item(sizeX - 1, sizeY - 2, player));
 
             }
 
 
-            Display::update(player, refresh, sizeX, sizeY, item);
+            Display::update(player, refresh, sizeX, sizeY, stars);
 
         }
 

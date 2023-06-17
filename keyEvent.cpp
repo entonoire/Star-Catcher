@@ -9,7 +9,7 @@
 char KeyEvent::direction = 'n';
 bool KeyEvent::wait = false;
 
-void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool& running)
+void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool& running, vector<Item> stars)
 {
 	if (Menu::isOpen())
 	{
@@ -219,7 +219,8 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
         }
         else if (GetKeyState(0x52) & 0x8000)  // R
         {
-            Item::updateItem(sizeX, sizeY, player);
+            for (Item item : stars) Item::updateItem(sizeX, sizeY, player, item.getPosition());
+
             refresh = true;
 
         }

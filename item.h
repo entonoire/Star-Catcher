@@ -12,12 +12,12 @@ namespace util
 class Item
 {
 private:
-    static int pos[2];
+    int pos[2];
 
 public:
     Item(int posX, int posY, Player player);
 
-    static void updateItem(int sizeX, int sizeY, Player player);
+    static void updateItem(int sizeX, int sizeY, Player player, int* pos);
     int* getPosition();
     int getX();
     int getY();
