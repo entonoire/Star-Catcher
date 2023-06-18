@@ -15,10 +15,13 @@
 #include <cstdio>
 #include "option.h"
 #include <vector>
+#include <Xinput.h>
+#define _WIN32_WINNT 0x0601
 using namespace std;
 #pragma execution_character_set( "utf-8" )
 
 int sizeX = 10, sizeY = 5;
+
 
 void formatConsole()
 {
@@ -40,6 +43,7 @@ int main()
     vector<Item> stars = { Item(sizeX - 1, sizeY - 2, player) };
 
     formatConsole();
+    XINPUT_STATE controllerState;
 
     /* --- pressing F11 to fullscreen --- */
     if (Option::isFullscreen()) Option::setFullscreen();
@@ -47,10 +51,15 @@ int main()
     bool refresh = true;
     bool running = true;
 
+    
 
     while (running)
     {
+
+        DWORD result = XInputGetState(0, &controllerState);
+        if (result == ERROR_SUCCESS) KeyEvent::listenXbox(controllerState, sizeX, sizeY, player, refresh, running, stars);
         KeyEvent::listen(sizeX, sizeY, player, refresh, running, stars);
+
 
 
         if (Menu::isOpen())
@@ -92,5 +101,6 @@ int main()
     cout << "                                                  " << endl;
     Sleep(1000);
     
+
     return 0;
 }
