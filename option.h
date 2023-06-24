@@ -16,10 +16,12 @@ public:
 	static void setState(bool newState);
 	static void setSelectedItem(Item newItem);
 	static Item getSelectedItem();
-	static void setFullscreen();
+	static void setFullscreen(bool init = false);
 	static vector<char> appearances;
 	static void updateAppearance(vector<char> update);
 	static bool isFullscreen();
+	static void saveChange();
+	static void init();
 
 private:
 	static bool open;

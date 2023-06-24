@@ -4,6 +4,11 @@
 #include "menu.h"
 #include "keyEvent.h"
 #include <vector>
+#include <fstream>
+#include <string>
+#include "display.h"
+#include <ShlObj_core.h>
+#include <direct.h>
 using namespace std;
 using namespace colorCode;
 
@@ -13,9 +18,93 @@ Option::Item Option::selectedItem = Item::appearance;
 Option::Item Option::oldSelectedItem = Item::back;
 vector<char> Option::appearances = { 'x', 'o', '@' };
 bool Option::fullscreenState = false;
+string path;
+
+void Option::init()
+{
+	LPSTR appdata = new CHAR[MAX_PATH];
+	ZeroMemory(appdata, MAX_PATH);
+
+	if (SUCCEEDED(SHGetFolderPathA(GetConsoleWindow(), CSIDL_APPDATA, NULL, 0, appdata)))
+	{
+		
+		path.append(appdata);
+		path.append("\\.StarCatcher");
+
+		int status = _mkdir(path.c_str());
+
+		path.append("\\options.sc");
+		ifstream file(path);
+
+		if (file)
+		{
+			if (file.peek() == ifstream::traits_type::eof()) // if (file.isEmpty())
+			{
+				ofstream writer(path);
+
+				for (char a : Option::appearances) writer << a << endl;
+				writer << "%skip%" << endl << Option::fullscreenState;
+
+				writer.close();
+			}
+			else
+			{
+				Option::appearances.clear();
+
+				string line;
+				bool running = true;
+
+				while (getline(file, line))
+				{
+					if (running)
+					{
+						if (line == "%skip%") running = false;
+						else Option::appearances.push_back(line[0]);
+
+					}
+
+				}
+
+				getline(file, line);
+				if (line == "1") Option::fullscreenState = true;
+				else Option::fullscreenState = false;
+
+			}
 
 
-void Option::setFullscreen()
+		}
+		else
+		{
+			Display::debugMsg = "couldn't acces option file (init)";
+		}
+
+		file.close();
+	}
+	delete[] appdata;
+
+}
+
+
+void Option::saveChange()
+{
+	ofstream file(path);
+
+	if (file)
+	{
+		for (char a : Option::appearances) file << a << endl;
+		file << "%skip%" << endl << Option::fullscreenState;
+
+
+	}
+	else
+	{
+		Display::debugMsg = "couldn't acces option file (save)";
+	}
+
+}
+
+
+void Option::setFullscreen(bool init)
 {
 	INPUT inputs[2] = {};
 	ZeroMemory(inputs, sizeof(inputs));
@@ -28,8 +117,8 @@ void Option::setFullscreen()
 	inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
 
 	UINT uSent = SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
-	if (uSent != ARRAYSIZE(inputs)) cerr << (L"SendInput failed: 0x%x\n", HRESULT_FROM_WIN32(GetLastError())) << endl;
-	else Option::fullscreenState = !Option::fullscreenState;
+	if (uSent != ARRAYSIZE(inputs)) Display::debugMsg = (L"SendInput failed: 0x%x\n", HRESULT_FROM_WIN32(GetLastError()));
+	else if (!init) Option::fullscreenState = !Option::fullscreenState;
 
 }
 
@@ -271,6 +360,8 @@ void Option::display(bool& refresh)
 		cout << "    |                       |" << endl;
 
 		cout << " -----------------------------------------------" << endl;
+
+		if (Display::debugMsg != "") cout << "Debug: " << Display::debugMsg;
 
 		oldSelectedItem = selectedItem;
 		refresh = false;

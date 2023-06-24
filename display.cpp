@@ -5,8 +5,9 @@
 #include <Windows.h>
 #include "option.h"
 #include <vector>
-
 using namespace std;
+
+string Display::debugMsg = "";
 
 void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector<Item>& stars)
 {
@@ -78,7 +79,7 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector
             }
 
         }
-
+        if (Display::debugMsg != "") cout << "Debug: " << Display::debugMsg;
 
         player.setOldPosition(player.getX(), player.getY());
         refresh = false;

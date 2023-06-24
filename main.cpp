@@ -33,12 +33,15 @@ void formatConsole()
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(out, &cursorInfo);
 
-    SetConsoleTitleW(L"Star Catch - Beta v0.3");
+    SetConsoleTitleW(L"StarCatcher - Beta v0.5");
 
 }
 
 int main()
 {
+
+    Option::init();
+
     Player player(1, 1);
     vector<Item> stars = { Item(sizeX - 1, sizeY - 2, player) };
 
@@ -46,12 +49,10 @@ int main()
     XINPUT_STATE controllerState;
 
     /* --- pressing F11 to fullscreen --- */
-    if (Option::isFullscreen()) Option::setFullscreen();
+    if (Option::isFullscreen()) Option::setFullscreen(true);
 
     bool refresh = true;
     bool running = true;
-
-    
 
     while (running)
     {
@@ -59,8 +60,6 @@ int main()
         DWORD result = XInputGetState(0, &controllerState);
         if (result == ERROR_SUCCESS) KeyEvent::listenXbox(controllerState, sizeX, sizeY, player, refresh, running, stars);
         KeyEvent::listen(sizeX, sizeY, player, refresh, running, stars);
-
-
 
         if (Menu::isOpen())
         {

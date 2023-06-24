@@ -96,6 +96,7 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
                 Option::setState(false);
                 Menu::setState(true);
                 refresh = true;
+                Option::saveChange();
 
                 break;
             case Option::appearance:
@@ -133,6 +134,7 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
                     Option::setState(false);
                     Menu::setState(true);
                     refresh = true;
+                    Option::saveChange();
 
                 }
 
@@ -189,6 +191,13 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
 
                 refresh = true;
                 Sleep(100);
+            }
+            else if (Option::getSelectedItem() == Option::fullscreenSelection)
+            {
+                Option::setFullscreen();
+                refresh = true;
+                Sleep(100);
+
             }
 
         }
@@ -423,6 +432,13 @@ void KeyEvent::listenXbox(XINPUT_STATE controllerState, int sizeX, int sizeY, Pl
 
                 refresh = true;
                 Sleep(200);
+            }
+            else if (Option::getSelectedItem() == Option::fullscreenSelection)
+            {
+                Option::setFullscreen();
+                refresh = true;
+                Sleep(200);
+
             }
 
         }

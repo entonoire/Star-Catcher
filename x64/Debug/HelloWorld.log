@@ -1,3 +1,30 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (HelloWorld.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
-  LINK : F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\x64\Debug\StarCatcher.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+  display.cpp
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\option.h(13,113): warning C4091: 'static ' : ignoré à gauche de 'Option::Item' quand aucune variable n'est déclarée
+  item.cpp
+  keyEvent.cpp
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\KeyEvent.h(10,1): warning C4005: '_WIN32_WINNT' : redéfinition de macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\sdkddkver.h(223,1): message : voir la définition précédente de '_WIN32_WINNT'
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\menu.h(24,53): warning C4091: 'static ' : ignoré à gauche de 'Menu::Item' quand aucune variable n'est déclarée
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\option.h(13,113): warning C4091: 'static ' : ignoré à gauche de 'Option::Item' quand aucune variable n'est déclarée
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.cpp(69,75): warning C4805: '!=' : mélange risqué de type 'Option::Item' et de type 'bool' dans l'opération
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.cpp(81,75): warning C4805: '!=' : mélange risqué de type 'Option::Item' et de type 'bool' dans l'opération
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.cpp(183,28): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.cpp(312,75): warning C4805: '!=' : mélange risqué de type 'Option::Item' et de type 'bool' dans l'opération
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.cpp(324,75): warning C4805: '!=' : mélange risqué de type 'Option::Item' et de type 'bool' dans l'opération
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.cpp(424,28): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  main.cpp
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.h(10,1): warning C4005: '_WIN32_WINNT' : redéfinition de macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\sdkddkver.h(223,1): message : voir la définition précédente de '_WIN32_WINNT'
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\menu.h(24,53): warning C4091: 'static ' : ignoré à gauche de 'Menu::Item' quand aucune variable n'est déclarée
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\option.h(13,113): warning C4091: 'static ' : ignoré à gauche de 'Option::Item' quand aucune variable n'est déclarée
+  menu.cpp
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\menu.h(24,53): warning C4091: 'static ' : ignoré à gauche de 'Menu::Item' quand aucune variable n'est déclarée
+  option.cpp
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\option.h(13,113): warning C4091: 'static ' : ignoré à gauche de 'Option::Item' quand aucune variable n'est déclarée
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\menu.h(24,53): warning C4091: 'static ' : ignoré à gauche de 'Menu::Item' quand aucune variable n'est déclarée
+F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\HelloWorld\keyEvent.h(10,1): warning C4005: '_WIN32_WINNT' : redéfinition de macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\sdkddkver.h(223,1): message : voir la définition précédente de '_WIN32_WINNT'
+  player.cpp
+  Génération de code en cours...
   HelloWorld.vcxproj -> F:\DEVELOPEMENT\CPP\HelloWorld\HelloWorld\x64\Debug\StarCatcher.exe

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Item.h"
 #include <Windows.h>
+#include "display.h"
 
 using namespace util;
 using namespace std;
@@ -164,7 +165,9 @@ void Menu::display(bool& refresh) {
 
         cout << "|                      |" << endl;
         cout << " ---------------------- " << endl;
-        cout << endl << "Tip: " << tips[random(0, 2)];
+        cout << endl << "Tip: " << tips[random(0, 2)] << endl;
+
+        if (Display::debugMsg != "") cout << "Debug: " << Display::debugMsg;
 
         oldSelectedItem = selectedItem;
         refresh = false;
