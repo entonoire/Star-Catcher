@@ -47,7 +47,9 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector
                 for (int x = 0; x < sizeX; x++)
                 {
 
-                    bool alreadyDisplayed = false;
+                    bool alreadyDisplayed = false; // used to check if you need to put blanck or fill it with something
+
+                    // display player
                     if (player.getX() == x && player.getY() == y)
                     {
                         cout << Option::appearances[(Option::appearances.size() - 1) / 2];
@@ -55,19 +57,39 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector
 
                     }
                     
+
+                    // display star
+                    int previousCoord[2]{};
+
                     for (Item item : stars)
                     {
                         if (item.getX() == x && item.getY() == y)
                         {
-                            SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+                            
+                            if (previousCoord[0] == x && previousCoord[1] == y)
+                            {
+                                SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { static_cast<short>(x + 1), static_cast<short>(y) }); // overwrite old star that have the exact same pos
+                                SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN);
+
+                            }
+                            else
+                            {
+                                SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+                            }
                             cout << "*";
                             SetConsoleTextAttribute(hConsole, 7);
 
                             alreadyDisplayed = true;
+
+                            previousCoord[0] = x;
+                            previousCoord[1] = y;
+
                         }
 
                     }
 
+
+                    // empty display
                     if (!alreadyDisplayed) cout << " ";
 
                 }
