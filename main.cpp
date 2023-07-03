@@ -43,7 +43,7 @@ int main()
     Option::init();
 
     Player player(1, 1);
-    vector<Item> stars = { Item(sizeX - 1, sizeY - 2, player), Item(sizeX - 1, sizeY - 2, player), Item(sizeX - 1, sizeY - 2, player) };
+    vector<Item> stars = { Item(sizeX - 1, sizeY - 2, player) };
 
     formatConsole();
     XINPUT_STATE controllerState;
