@@ -21,7 +21,8 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
         if ((GetKeyState(VK_DOWN) & 0x8000))
         {
             if (Menu::getSelectedItem() == Menu::Item::play) Menu::setSelectedItem(Menu::Item::option);
-            else if (Menu::getSelectedItem() == Menu::Item::option) Menu::setSelectedItem(Menu::Item::quit);
+            else if (Menu::getSelectedItem() == Menu::Item::option) Menu::setSelectedItem(Menu::Item::scoreboard);
+            else if (Menu::getSelectedItem() == Menu::Item::scoreboard) Menu::setSelectedItem(Menu::Item::quit);
             else Menu::setSelectedItem(Menu::Item::play);
             Sleep(100);
 
@@ -29,6 +30,8 @@ void KeyEvent::listen(int sizeX, int sizeY, Player& player, bool& refresh, bool&
         else if ((GetKeyState(VK_UP) & 0x8000))
         {
             if (Menu::getSelectedItem() == Menu::Item::play) Menu::setSelectedItem(Menu::Item::quit);
+            else if (Menu::getSelectedItem() == Menu::Item::quit) Menu::setSelectedItem(Menu::Item::scoreboard);
+            else if (Menu::getSelectedItem() == Menu::Item::scoreboard) Menu::setSelectedItem(Menu::Item::option);
             else if (Menu::getSelectedItem() == Menu::Item::option) Menu::setSelectedItem(Menu::Item::play);
             else Menu::setSelectedItem(Menu::Item::option);
             Sleep(100);

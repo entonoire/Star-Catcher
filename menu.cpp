@@ -124,6 +124,45 @@ void Menu::display(bool& refresh) {
         }
 
 
+        // scoreboard button
+        cout << "|   ";
+        if (selectedItem == Item::scoreboard)
+        {
+            SetConsoleTextAttribute(hConsole, selectColor);
+            cout << "----------------";
+            SetConsoleTextAttribute(hConsole, baseColor);
+            cout << "   |" << endl;
+            cout << "| ";
+            SetConsoleTextAttribute(hConsole, selectColor);
+            cout << ">|   SCOREBOARD   |<";
+            SetConsoleTextAttribute(hConsole, baseColor);
+            cout << " | " << endl;
+            cout << "|   ";
+            SetConsoleTextAttribute(hConsole, selectColor);
+            cout << "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯";
+            SetConsoleTextAttribute(hConsole, baseColor);
+            cout << "   |" << endl;
+        }
+        else
+        {
+            SetConsoleTextAttribute(hConsole, color);
+            cout << "----------------";
+            SetConsoleTextAttribute(hConsole, baseColor);
+            cout << "   |" << endl;
+            cout << "|  ";
+            SetConsoleTextAttribute(hConsole, color);
+            cout << "|   SCOREBOARD   |";
+            SetConsoleTextAttribute(hConsole, baseColor);
+            cout << "  | " << endl;
+            cout << "|   ";
+            SetConsoleTextAttribute(hConsole, color);
+            cout << "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯";
+            SetConsoleTextAttribute(hConsole, baseColor);
+            cout << "   |" << endl;
+
+        }
+
+
         // quit button
         cout << "|   ";
         if (selectedItem == Menu::quit)
