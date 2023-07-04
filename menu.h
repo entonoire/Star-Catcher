@@ -8,8 +8,8 @@ using namespace std;
 namespace colorCode
 {
 	int const color = FOREGROUND_GREEN;
-	string const underline = "\033[4m";
-	string const bold = "\033[7m";
+	wstring const underline = L"\033[4m";
+	wstring const bold = L"\033[7m";
 	int const title = FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
 	int const selectColor = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	int const baseColor = 7;

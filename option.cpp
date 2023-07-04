@@ -11,6 +11,7 @@
 #include <direct.h>
 using namespace std;
 using namespace colorCode;
+using namespace tool;
 
 
 bool Option::open = false;
@@ -75,7 +76,7 @@ void Option::init()
 		}
 		else
 		{
-			Display::debugMsg = "couldn't acces option file (init)";
+			Display::debugMsg = L"couldn't acces option file (init)";
 		}
 
 		file.close();
@@ -98,7 +99,7 @@ void Option::saveChange()
 	}
 	else
 	{
-		Display::debugMsg = "couldn't acces option file (save)";
+		Display::debugMsg = L"couldn't acces option file (save)";
 	}
 
 }
@@ -152,54 +153,45 @@ void Option::display(bool& refresh)
 		hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		FlushConsoleInputBuffer(hConsole);
 
-		cout << " -----------------------------------------------" << endl;
+		wcout << topLeftCorner << wstring(47, horizontalLine) << topRightCorner << endl;
 		
 		// title
-		cout << "|                    ";
+		wcout << verticalLine << "                    ";
 		SetConsoleTextAttribute(hConsole, title);
-		cout << underline << "OPTIONS";
+		wcout << underline << "OPTIONS";
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "                    |" << endl;
+		wcout << "                    " << verticalLine << endl;
 		
-		cout << "|                                               |" << endl;
+		// separation line
+		wcout << L"\u251C" << wstring(23, horizontalLine) << L"\u252C" << wstring(23, horizontalLine) << L"\u2524" << endl;
+		wcout << verticalLine << "                       " << verticalLine << "                       " << verticalLine << endl;
 
 		// appearance top
-		cout << "|   ";
+		wcout << verticalLine << "  ";
 		if (selectedItem == appearance) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
-		cout << "----------------";
+		wcout << topLeftCorner << wstring(16, horizontalLine) << topRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
 
 		// appearance selection top
-		cout << "    |     ";
+		wcout << "   " << verticalLine << "    ";
 		if (selectedItem == appearanceSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
-		cout << "-------------";
+		wcout << topLeftCorner << wstring(13, horizontalLine) << topRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "     |" << endl;
-
+		wcout << "    " << verticalLine << endl;
 
 		// appearance middle
-		cout << "| ";
-		if (selectedItem == appearance)
-		{
-			SetConsoleTextAttribute(hConsole, selectColor);
-			cout << ">|   APPEARANCE   |<";
-
-		}
-		else
-		{
-			SetConsoleTextAttribute(hConsole, color);
-			if (selectedItem == appearanceSelection) cout << ">|   APPEARANCE   |<"; else cout << " |   APPEARANCE   | ";
-
-		}
+		wcout << verticalLine << " ";
+		if (selectedItem == appearance) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
+		wcout << " " << verticalLine << "   APPEARANCE   " << verticalLine << " ";
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "  |   ";
+		wcout << "  " << verticalLine << "   ";
 
 		// appearance selection middle
 		if (selectedItem == appearanceSelection)
 		{
 			SetConsoleTextAttribute(hConsole, selectColor);
-			cout << "<";
-			cout << "|    ";
+			wcout << "<";
+			wcout << verticalLine << "    ";
 
 			for (char c : appearances)
 			{
@@ -208,29 +200,29 @@ void Option::display(bool& refresh)
 				if (c == appearances[appearances.size() / 2])
 				{
 
-					cout << " ";
-					cout << bold << c;
+					wcout << " ";
+					wcout << bold << c;
 					SetConsoleTextAttribute(hConsole, selectColor);
-					cout << " ";
+					wcout << " ";
 
 				}
 				else
 				{
-					cout << c;
+					wcout << c;
 
 				}
 
 			}
 
-			cout << "    |";
-			cout << ">";
+			wcout << "    " << verticalLine;
+			wcout << ">";
 
 		}
 		else
 		{
 			SetConsoleTextAttribute(hConsole, inaccessible);
-			cout << "<";
-			cout << "|    ";
+			wcout << "<";
+			wcout << verticalLine << "    ";
 
 
 			for (char c : appearances)
@@ -240,128 +232,107 @@ void Option::display(bool& refresh)
 				if (c == appearances[appearances.size() / 2])
 				{
 
-					cout << " ";
-					cout << bold << c;
+					wcout << " ";
+					wcout << bold << c;
 					SetConsoleTextAttribute(hConsole, inaccessible);
-					cout << " ";
+					wcout << " ";
 
 				}
 				else
 				{
-					cout << c;
+					wcout << c;
 
 				}
 
 			}
 
 
-			cout << "    |";
-			cout << ">";
+			wcout << "    " << verticalLine;
+			wcout << ">";
 
 		}
 
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "   |" << endl;
+		wcout << "   " << verticalLine << endl;
 
 		// appearance bottom
-		cout << "|   ";
+		wcout << verticalLine << "  ";
 		if (selectedItem == appearance) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
-		cout << "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯";
+		wcout << bottomLeftCorner << wstring(16, horizontalLine) << bottomRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "    |     ";
+		wcout << "   " << verticalLine << "    ";
 
 		// appearance selection bottom
 		if (selectedItem == appearanceSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
-		cout << "¯¯¯¯¯¯¯¯¯¯¯¯¯";
+		wcout << bottomLeftCorner << wstring(13, horizontalLine) << bottomRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "     |" << endl;
+		wcout << "    " << verticalLine << endl;
 
 		// fullscreen top
-		cout << "|   ";
+		wcout << verticalLine << "  ";
 		if (selectedItem == Option::fullscreen) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
-		cout << "----------------";
+		wcout << topLeftCorner << wstring(16, horizontalLine) << topRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "    |         ";
+		wcout << "   " << verticalLine << "        ";
 
 		// fullscreen selection top
 		if (selectedItem == Option::fullscreenSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
-		cout << "-----";
+		wcout << topLeftCorner << wstring(5, horizontalLine) << topRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "         |" << endl;
+		wcout << "        " << verticalLine << endl;
 
 		// fullscreen middle
-		cout << "| ";
-		if (selectedItem == Option::fullscreen)
-		{
-			SetConsoleTextAttribute(hConsole, selectColor);
-			cout << ">|   FULLSCREEN   |<";
-
-		}
-		else
-		{
-			SetConsoleTextAttribute(hConsole, color);
-			if (selectedItem == Option::fullscreenSelection) cout << ">|   FULLSCREEN   |<"; else cout << " |   FULLSCREEN   | ";
-
-		}
+		wcout << verticalLine << " ";
+		if (selectedItem == Option::fullscreen) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
+		wcout << " " << verticalLine << "   FULLSCREEN   " << verticalLine << " ";
 
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "  |       ";
+		wcout << "  " << verticalLine << "       ";
 
 		// fullscreen selection middle
 		if (selectedItem == Option::fullscreenSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
-		if (Option::fullscreenState) cout << "<| Yes |>"; else cout << "<| No  |>";
+		if (Option::fullscreenState) wcout << "<" << verticalLine << " Yes " << verticalLine << ">"; else wcout << "<" << verticalLine << " No  " << verticalLine << ">";
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "       |" << endl;
+		wcout << "       " << verticalLine << endl;
 
 
 		// fullscreen bottom
-		cout << "|   ";
+		wcout << verticalLine << "  ";
 		if (selectedItem == Option::fullscreen) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
-		cout << "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯";
+		wcout << bottomLeftCorner << wstring(16, horizontalLine) << bottomRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "    |         ";
+		wcout << "   " << verticalLine << "        ";
 
 		// fullscreen selection bottom
 		if (selectedItem == Option::fullscreenSelection) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, inaccessible);
-		cout << "¯¯¯¯¯";
+		wcout << bottomLeftCorner << wstring(5, horizontalLine) << bottomRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "         |" << endl;
+		wcout << "        " << verticalLine << endl;
 
 		// back top
-		cout << "|   ";
+		wcout << verticalLine << "  ";
 		if (selectedItem == back) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
-		cout << "----------------";
+		wcout << topLeftCorner << wstring(16, horizontalLine) << topRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "    |                       |" << endl;
+		wcout << "   " << verticalLine << "                       " << verticalLine << endl;
 
 		// back middle
-		cout << "| ";
-		if (selectedItem == back)
-		{
-			SetConsoleTextAttribute(hConsole, selectColor);
-			cout << ">|      BACK      |<";
-
-		}
-		else
-		{
-			SetConsoleTextAttribute(hConsole, color);
-			cout << " |      BACK      | ";
-
-		}
-		
+		wcout << verticalLine << " ";
+		if (selectedItem == back) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
+		wcout << " " << verticalLine << "      BACK      " << verticalLine << "   ";
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "  |                       |" << endl;
+		wcout << verticalLine << "  " << "                     " << verticalLine << endl;
 
 		// back bottom
-		cout << "|   ";
+		wcout << verticalLine << "  ";
 		if (selectedItem == back) SetConsoleTextAttribute(hConsole, selectColor); else SetConsoleTextAttribute(hConsole, color);
-		cout << "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯";
+		wcout << bottomLeftCorner << wstring(16, horizontalLine) << bottomRightCorner;
 		SetConsoleTextAttribute(hConsole, baseColor);
-		cout << "    |                       |" << endl;
+		wcout << "   " << verticalLine << "                       " << verticalLine << endl;
 
-		cout << " -----------------------------------------------" << endl;
+		wcout << bottomLeftCorner << wstring(23, horizontalLine) << L"\u2534" << wstring(23, horizontalLine) << bottomRightCorner << endl;
 
-		if (Display::debugMsg != "") cout << "Debug: " << Display::debugMsg;
+		if (Display::debugMsg != L"") wcout << "Debug: " << Display::debugMsg;
 
 		oldSelectedItem = selectedItem;
 		refresh = false;

@@ -6,8 +6,25 @@
 #include "option.h"
 #include <vector>
 using namespace std;
+using namespace tool;
 
-string Display::debugMsg = "";
+namespace tool
+{
+    wchar_t topLeftCorner = L'\u256D';
+    wchar_t topRightCorner = L'\u256E';
+    wchar_t horizontalLine = L'\u2500';
+    wchar_t verticalLine = L'\u2502';
+    wchar_t bottomLeftCorner = L'\u2570';
+    wchar_t bottomRightCorner = L'\u256F';
+
+    //wchar_t topLeftCorner = L'\u250C';
+    //wchar_t topRightCorner = L'\u2510';
+    //wchar_t bottomLeftCorner = L'\u2514';
+    //wchar_t bottomRightCorner = L'\u2518';
+}
+
+
+wstring Display::debugMsg = L"";
 
 void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector<Item>& stars)
 {
@@ -34,16 +51,25 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector
 
         for (int y = 0; y < sizeY; y++)
         {
-            if (y == 0 || y == sizeY - 1)
+            if (y == 0)
             {
-                cout << " ";
-                for (int x = 0; x < sizeX; x++) cout << "-";
-                cout << " " << endl;
+                // box top
+                wcout << topLeftCorner;
+                for (int x = 0; x < sizeX; x++) wcout << horizontalLine;
+                wcout << topRightCorner << endl;
+
+            }
+            else if (y == sizeY - 1)
+            {
+                // box bottom
+                wcout << bottomLeftCorner;
+                for (int x = 0; x < sizeX; x++) wcout << horizontalLine;
+                wcout << bottomRightCorner << endl;
 
             }
             else
             {
-                cout << "|";
+                wcout << verticalLine;
                 for (int x = 0; x < sizeX; x++)
                 {
 
@@ -52,7 +78,7 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector
                     // display player
                     if (player.getX() == x && player.getY() == y)
                     {
-                        cout << Option::appearances[(Option::appearances.size() - 1) / 2];
+                        wcout << Option::appearances[(Option::appearances.size() - 1) / 2];
                         alreadyDisplayed = true;
 
                     }
@@ -76,7 +102,7 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector
                             {
                                 SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
                             }
-                            cout << "*";
+                            wcout << L"\u2605";
                             SetConsoleTextAttribute(hConsole, 7);
 
                             alreadyDisplayed = true;
@@ -90,18 +116,18 @@ void Display::update(Player& player, bool& refresh, int sizeX, int sizeY, vector
 
 
                     // empty display
-                    if (!alreadyDisplayed) cout << " ";
+                    if (!alreadyDisplayed) wcout << " ";
 
                 }
 
-                cout << "|";
-                if (y == sizeY / 2) cout << "  " << player.getScore() << " points";
-                cout << endl;
+                wcout << verticalLine;
+                if (y == sizeY / 2) wcout << "  " << player.getScore() << " points";
+                wcout << endl;
 
             }
 
         }
-        if (Display::debugMsg != "") cout << "Debug: " << Display::debugMsg;
+        if (Display::debugMsg != L"") wcout << "Debug: " << Display::debugMsg;
 
         player.setOldPosition(player.getX(), player.getY());
         refresh = false;

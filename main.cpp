@@ -16,6 +16,8 @@
 #include "option.h"
 #include <vector>
 #include <Xinput.h>
+#include <fcntl.h>
+#include <io.h>
 #define _WIN32_WINNT 0x0601
 using namespace std;
 #pragma execution_character_set( "utf-8" )
@@ -26,7 +28,8 @@ int sizeX = 10, sizeY = 5;
 void formatConsole()
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleOutputCP(1252); // ANSI Latin 1; Western European (Windows)
+    //SetConsoleOutputCP(1252); // ANSI Latin 1; Western European (Windows)
+    SetConsoleOutputCP(65001); // UTF-8
 
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(out, &cursorInfo);
@@ -34,6 +37,9 @@ void formatConsole()
     SetConsoleCursorInfo(out, &cursorInfo);
 
     SetConsoleTitleW(L"StarCatcher - Beta v0.5");
+
+
+    _setmode(_fileno((__acrt_iob_func(1))), _O_U16TEXT);
 
 }
 
@@ -91,13 +97,13 @@ int main()
 
     system("cls");        
     system("color 2");
-    cout << "   _____  ____   ____  _____  ______     ________ " << endl;
-    cout << "  / ____|/ __ \\ / __ \\|  __ \\|  _ \\ \\   / |  ____|" << endl;
-    cout << " | |  __| |  | | |  | | |  | | |_) \\ \\_/ /| |__   " << endl;
-    cout << " | | |_ | |  | | |  | | |  | |  _ < \\   / |  __|  " << endl;
-    cout << " | |__| | |__| | |__| | |__| | |_) | | |  | |____ " << endl;
-    cout << "  \\_____|\\____/ \\____/|_____/|____/  |_|  |______|" << endl;
-    cout << "                                                  " << endl;
+    wcout << "   _____  ____   ____  _____  ______     ________ " << endl;
+    wcout << "  / ____|/ __ \\ / __ \\|  __ \\|  _ \\ \\   / |  ____|" << endl;
+    wcout << " | |  __| |  | | |  | | |  | | |_) \\ \\_/ /| |__   " << endl;
+    wcout << " | | |_ | |  | | |  | | |  | |  _ < \\   / |  __|  " << endl;
+    wcout << " | |__| | |__| | |__| | |__| | |_) | | |  | |____ " << endl;
+    wcout << "  \\_____|\\____/ \\____/|_____/|____/  |_|  |______|" << endl;
+    wcout << "                                                  " << endl;
     Sleep(1000);
     
 
