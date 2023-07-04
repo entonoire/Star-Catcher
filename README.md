@@ -16,8 +16,8 @@ escape : open menu in game, leave menu
 enter : validate menu choice
 
 ## Screenshots
-![image](https://github.com/entonoire/Star-Catcher/assets/43643450/340a40f4-d25e-4c0b-bb9c-0e94db1f69e6)
+![image](https://github.com/entonoire/Star-Catcher/assets/43643450/b3c811ac-19e6-4c4d-a2b5-f68160568605)
 <br>
-![image](https://github.com/entonoire/Star-Catcher/assets/43643450/7e3e9621-1ae6-470e-b377-8224e14e108a)
+![image](https://github.com/entonoire/Star-Catcher/assets/43643450/271b926a-00c6-433b-8c3f-a953ea48c776)
 <br>
-![image](https://github.com/entonoire/Star-Catcher/assets/43643450/ed5c1605-c023-4534-9519-ca77e963d9ac)
+![image](https://github.com/entonoire/Star-Catcher/assets/43643450/95bf268d-984d-4e11-8c6c-5884f1cc7222)
